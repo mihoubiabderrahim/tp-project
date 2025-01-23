@@ -5,7 +5,7 @@
 #define MAX_PROJECTS 100
 #define MAX_HISTORY 10
 #define MAX_QUEUE 100
-// Structure pour un projet
+
 typedef struct {
     int id;
     char title[100];
@@ -14,7 +14,6 @@ typedef struct {
     int historyCount;
 } Project;
 
-// Structure pour le gestionnaire de projets
 typedef struct {
     Project projects[MAX_PROJECTS];
     int projectCount;
@@ -23,14 +22,14 @@ typedef struct {
     int queueRear;
     int nextId;
 } ProjectManager;
-// Initialiser le gestionnaire de projets
+
 void initProjectManager(ProjectManager *manager) {
     manager->projectCount = 0;
     manager->queueFront = 0;
     manager->queueRear = 0;
     manager->nextId = 1;
 }
-// Ajouter un projet
+
 void addProject(ProjectManager *manager, const char *title, const char *description) {
     if (manager->projectCount >= MAX_PROJECTS) {
         printf("Capacité maximale atteinte, impossible d'ajouter un nouveau projet.\n");
@@ -45,7 +44,6 @@ void addProject(ProjectManager *manager, const char *title, const char *descript
     printf("Projet ajouté : %s (ID: %d)\n", newProject->title, newProject->id);
 }
 
-// Supprimer un projet par ID
 void deleteProject(ProjectManager *manager, int id) {
     int i, j;
     for (i = 0; i < manager->projectCount; i++) {
