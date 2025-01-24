@@ -109,3 +109,12 @@ void showHistory(ProjectManager *manager, int id) {
     }
     printf("Projet avec ID %d introuvable.\n", id);
  }
+
+
+ //Partie2: Traiter un projet de la file d'attente
+void processRevision(ProjectManager *manager) {
+    if (manager->queueFront == manager->queueRear) {
+        printf("Aucun projet dans la file d'attente pour révision.\n");
+        return;
+    }
+   
