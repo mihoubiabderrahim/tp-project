@@ -128,3 +128,22 @@ void processRevision(ProjectManager *manager) {
     }
     printf("Projet avec ID %d introuvable dans la base de données.\n", id);
 } 
+int main() {
+    ProjectManager manager;
+    initProjectManager(&manager);
+    int choice, id;
+    char title[100], description[255];
+    // affichage de menu 
+    do {
+        printf("\n--- Menu de Gestion des Projets Étudiants ---\n");
+        printf("1. Ajouter un projet\n");
+        printf("2. Supprimer un projet\n");
+        printf("3. Rechercher un projet\n");
+        printf("4. Afficher l'historique d'un projet\n");
+        printf("5. Ajouter un projet à la file d'attente pour révision\n");
+        printf("6. Traiter un projet de la file d'attente\n");
+        printf("0. Quitter\n");
+        printf("Choix : ");
+        scanf("%d", &choice);
+        getchar();
+     
