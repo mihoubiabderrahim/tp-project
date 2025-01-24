@@ -117,4 +117,14 @@ void processRevision(ProjectManager *manager) {
         printf("Aucun projet dans la file d'attente pour révision.\n");
         return;
     }
-   
+      int id = manager->revisionQueue[manager->queueFront++];
+    int i;
+    for (i = 0; i < manager->projectCount; i++) {
+        if (manager->projects[i].id == id) {
+            strncpy(manager->projects[i].history[manager->projects[i].historyCount++], "Projet révisé", 255);
+            printf("Révision terminée pour le projet ID %d : %s\n", id, manager->projects[i].title);
+            return;
+        }
+    }
+    printf("Projet avec ID %d introuvable dans la base de données.\n", id);
+} 
