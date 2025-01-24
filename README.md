@@ -88,3 +88,24 @@ void showHistory(ProjectManager *manager, int id) {
     }
     printf("Projet avec ID %d introuvable.\n", id);
 }
+
+
+
+// Gestion des files d'attente pour la revision des projet 
+
+   // Partie1: Ajouter un projet à la file d'attente pour révision
+  void addToRevisionQueue(ProjectManager *manager, int id) {
+    if (manager->queueRear >= MAX_QUEUE) {
+        printf("File d'attente pleine.\n");
+        return;
+    }
+    int i;
+    for (i = 0; i < manager->projectCount; i++) {
+        if (manager->projects[i].id == id) {
+            manager->revisionQueue[manager->queueRear++] = id;
+            printf("Projet ID %d ajouté à la file d'attente pour révision.\n", id);
+            return;
+        }
+    }
+    printf("Projet avec ID %d introuvable.\n", id);
+ }
