@@ -146,4 +146,45 @@ int main() {
         printf("Choix : ");
         scanf("%d", &choice);
         getchar();
-     
+      switch (choice) {
+            case 1:
+                printf("Titre du projet : ");
+                fgets(title, sizeof(title), stdin);
+                title[strcspn(title, "\n")] = '\0'; // Enlever le '\n'
+                printf("Description du projet : ");
+                fgets(description, sizeof(description), stdin);
+                description[strcspn(description, "\n")] = '\0'; 
+                addProject(&manager, title, description); 
+                break;
+            case 2:
+                printf("ID du projet à supprimer : ");
+                scanf("%d", &id);
+                deleteProject(&manager, id);
+                break;
+            case 3:
+                printf("ID du projet à rechercher : ");
+                scanf("%d", &id);
+                searchProject(&manager, id);
+                break;
+            case 4:
+                printf("ID du projet pour afficher l'historique : ");
+                scanf("%d", &id);
+                showHistory(&manager, id);
+                break;
+            case 5:
+                printf("ID du projet à ajouter à la file d'attente : ");
+                scanf("%d", &id);
+                addToRevisionQueue(&manager, id);
+                break;
+            case 6:
+                processRevision(&manager);
+                break;
+            case 0:
+                printf("Au revoir !\n");
+                break;
+            default:
+                printf("Choix invalide.\n");
+        }
+    } while (choice != 0)
+    return 0;
+}
