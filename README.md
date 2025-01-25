@@ -3,14 +3,14 @@
 #include <string.h>
 
 #define MAX_PROJECTS 100
-#define MAX_HISTORY 10
+#define MAX_HISTORY 100
 #define MAX_QUEUE 100
 
 typedef struct {
     int id;
     char title[100];
-    char description[255];
-    char history[MAX_HISTORY][255];
+    char description[250];
+    char history[MAX_HISTORY][100];
     int historyCount;
 } Project;
 
@@ -40,7 +40,7 @@ void addProject(ProjectManager *manager, const char *title, const char *descript
     strncpy(newProject->title, title, sizeof(newProject->title));
     strncpy(newProject->description, description, sizeof(newProject->description));
     newProject->historyCount = 0;
-    strncpy(newProject->history[newProject->historyCount++], "Projet ajouté", 255);
+    strncpy(newProject->history[newProject->historyCount++], "Projet ajouté", 100);
     printf("Projet ajouté : %s (ID: %d)\n", newProject->title, newProject->id);
 }
 
@@ -48,7 +48,7 @@ void deleteProject(ProjectManager *manager, int id) {
     int i, j;
     for (i = 0; i < manager->projectCount; i++) {
         if (manager->projects[i].id == id) {
-            strncpy(manager->projects[i].history[manager->projects[i].historyCount++], "Projet supprimé", 255);
+            strncpy(manager->projects[i].history[manager->projects[i].historyCount++], "Projet supprimé", 100);
             printf("Projet supprimé : %s (ID: %d)\n", manager->projects[i].title, id);
             // Supprimer le projet en décalant les éléments
             for (j = i; j < manager->projectCount - 1; j++) {
@@ -121,7 +121,7 @@ void processRevision(ProjectManager *manager) {
     int i;
     for (i = 0; i < manager->projectCount; i++) {
         if (manager->projects[i].id == id) {
-            strncpy(manager->projects[i].history[manager->projects[i].historyCount++], "Projet révisé", 255);
+            strncpy(manager->projects[i].history[manager->projects[i].historyCount++], "Projet révisé", 100);
             printf("Révision terminée pour le projet ID %d : %s\n", id, manager->projects[i].title);
             return;
         }
@@ -132,7 +132,7 @@ int main() {
     ProjectManager manager;
     initProjectManager(&manager);
     int choice, id;
-    char title[100], description[255];
+    char title[100], description[250];
     // affichage de menu 
     do {
         printf("\n--- Menu de Gestion des Projets Étudiants ---\n");
