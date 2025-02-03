@@ -153,7 +153,7 @@ int main() {
             case 1:
                 printf("Titre du projet : ");
                 fgets(title, sizeof(title), stdin);
-                title[strcspn(title, "\n")] = '\0'; // Enlever le '\n'
+                title[strcspn(title, "\n")] = '\0'; 
                 printf("Description du projet : ");
                 fgets(description, sizeof(description), stdin);
                 description[strcspn(description, "\n")] = '\0'; 
