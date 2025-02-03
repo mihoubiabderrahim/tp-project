@@ -111,26 +111,48 @@ void showHistory(ProjectManager *manager, int id) {
  }
 
 
- //Partie2: Traiter un projet de la file d'attente
-void processRevision(ProjectManager *manager) {
-    if (manager->queueFront == manager->queueRear) {
-        printf("Aucun projet dans la file d'attente pour révision.\n");
-        return;
-    }
-      int id = manager->revisionQueue[manager->queueFront++];
-    int i;
-    for (i = 0; i < manager->projectCount; i++) {
-        if (manager->projects[i].id == id) {
-            strncpy(manager->projects[i].history[manager->projects[i].historyCount++], "Projet révisé", 100);
-            printf("Révision terminée pour le projet ID %d : %s\n", id, manager->projects[i].title);
-            return;
-        }
-    }
-    printf("Projet avec ID %d introuvable dans la base de données.\n", id);
+//Portie2: Troiter un projet de lo file d'attente
 
+void processRevision (ProjectManager *manager) {
+if (manager->queueFront == manager->queueRear) {
+printf("Aucun projet dans la file d'attente pour révision, \n");
+return;
+}
 
-    
-} 
+int id = manager->revisionQueue [manager->queueFront++];
+int i;
+for (i=0; i < manager->projectCount; i++) { 
+    if (manager->projects[i].id == id) { 
+     printf("Révision du projet ID %d: %s\n", id, manager->projects[i].title);
+
+// Demander à L'utilisateur s'il souhaite modifier le titre et lo description
+char modif;
+printf("Souhaitez-vous modifier le titre et la description du projet?: "); 
+scanf(" %c", &modif); 
+
+  if (modif == 'o' || modif == 'O') {
+ // Modifier le titre
+    printf("Entrez le nouveau titre du projet: ");
+    getchar();  
+    fgets (manager->projects[i].title, sizeof (manager->projects[i].title), stdin);
+
+// Modifier la description
+      printf("Entrez la nouvelle description du projet: ");
+      fgets (manager->projects[i].description, sizeof(manager->projects[i].description), stdin);
+
+// Ajouter un historique pour La modification
+         strncpy(manager->projects[i].history[manager->projects[i]. historyCount++], "Titre et description modifiés", 100);
+         printf("Le titre et la description du projet ont été modifiés.\n");
+       } else {
+    // Si l'utilisateur ne souhaite pos modifier
+       printf("Aucune modification n'a été effectuée. \n");
+     }
+     return;
+   }
+
+  } printf("Projet avec ID %d introuvable dans la base de données. \n", id);
+}
+
 
  
 int main() {
