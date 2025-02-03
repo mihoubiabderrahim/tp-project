@@ -127,6 +127,9 @@ void processRevision(ProjectManager *manager) {
         }
     }
     printf("Projet avec ID %d introuvable dans la base de données.\n", id);
+
+
+    
 } 
 int main() {
     ProjectManager manager;
